@@ -1,3 +1,8 @@
+from gtts import gTTS
+import pygame
+
+language = 'en'
+
 cities = dict({
     0: "Agra",
     1: "Delhi",
@@ -92,7 +97,7 @@ def Dijkshtra(src, dest, index):
     z.reverse()
     length = len(z)
     if index == 1:
-        print("\nThe shortest distance from " + cities[src] + " to " + cities[dest] + " is: ")
+        print("\nThe shortest path from " + cities[src] + " to " + cities[dest] + " is: ")
         for i in z:
             print(" -> " + cities[i], end="")
         time = 0
@@ -109,7 +114,7 @@ def Dijkshtra(src, dest, index):
         print("\nThe Time is: " + str(time) + "min")
 
     if index == 2:
-        print("\nThe cheapest distance from " + cities[src] + " to " + cities[dest] + " is: ")
+        print("\nThe cheapest path from " + cities[src] + " to " + cities[dest] + " is: ")
         for i in z:
             print(" -> " + cities[i], end="")
         distance = 0
@@ -126,7 +131,7 @@ def Dijkshtra(src, dest, index):
         print("\nThe Time is: " + str(time) + "min")
 
     if index == 3:
-        print("\nThe fastest distance from " + cities[src] + " to " + cities[dest] + " is: ")
+        print("\nThe fastest path from " + cities[src] + " to " + cities[dest] + " is: ")
         for i in z:
             print(" -> " + cities[i], end="")
         distance = 0
@@ -144,21 +149,40 @@ def Dijkshtra(src, dest, index):
 
 
 def takeinput():
+    intro = "Welcome to Airline route optimization system These are the flights available right now: Enter your source city code: "
+    myobj = gTTS(text=intro, lang=language, slow=False)
+    myobj.save("welcome.mp3")
+    pygame.mixer.init()
+    pygame.mixer.music.load("welcome.mp3")
+    pygame.mixer.music.play()
     print("Welcome to Airline route optimization system")
     print("These are the flights available right now: ")
     for i in cities:
         print("code: " + str(i) + "\t\t" + str(cities[i]))
+
     print("Enter your source city code: ")
     src = int(input())
+    intro = "Enter your destination city code: "
+    myobj = gTTS(text=intro, lang=language, slow=False)
+    myobj.save("welcome1.mp3")
+    pygame.mixer.init()
+    pygame.mixer.music.load("welcome1.mp3")
+    pygame.mixer.music.play()
     print("Enter your destination city code: ")
     dest = int(input())
+    intro = "ThankYou for confirming the details"
+    myobj = gTTS(text=intro, lang=language, slow=False)
+    myobj.save("welcome2.mp3")
+    pygame.mixer.init()
+    pygame.mixer.music.load("welcome2.mp3")
+    pygame.mixer.music.play()
     print("ThankYou for confirming the details")
-    print("Enter 1 if you want the shortest path")
-    print("Enter 2 if you want the cheapest path")
-    print("Enter 3 if you want the fastest path")
-    print("Enter 4 to exit")
     run = 1
     while run:
+        print("Enter 1 if you want the shortest path")
+        print("Enter 2 if you want the cheapest path")
+        print("Enter 3 if you want the fastest path")
+        print("Enter 4 to exit")
         path = int(input())
         if path == 1:
             Dijkshtra(src, dest, 1)
@@ -171,7 +195,13 @@ def takeinput():
             pass
         else:
             run = 0
-            print("Thank You for using. Please vist again")
-
+    intro = "Thank You for using. Please vist again"
+    myobj = gTTS(text=intro, lang=language, slow=False)
+    myobj.save("welcome3.mp3")
+    pygame.mixer.init()
+    pygame.mixer.music.load("welcome3.mp3")
+    pygame.mixer.music.play()
+    print("Thank You for using. Please vist again")
+    
 
 takeinput()
