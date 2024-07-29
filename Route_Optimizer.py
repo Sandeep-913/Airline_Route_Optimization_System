@@ -68,9 +68,7 @@ for i in range(9):
 
 def Dijkshtra(src, dest, index):
     k = [float('inf')] * 9
-    v = [0] * 9
     k[src] = 0
-    v[src] = 1
     p = [-1] * 9
     a = [[0, src]]
     while len(a) != 0:
